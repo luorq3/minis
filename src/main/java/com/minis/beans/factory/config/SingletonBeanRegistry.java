@@ -1,4 +1,4 @@
-package com.minis.beans.factory;
+package com.minis.beans.factory.config;
 
 public interface SingletonBeanRegistry {
     void registerSingleton(String beanName, Object singletonObject);
