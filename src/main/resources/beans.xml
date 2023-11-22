@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
     <bean id="basebaseservice" class="com.minis.test.entity.BaseBaseService">
-        <property type="com.minis.test.entity.AServiceImpl" name="as" ref="aservice"/>
+        <property type="com.minis.test.entity.AService" name="as" ref="aservice"/>
     </bean>
 
     <bean id="aservice" class="com.minis.test.entity.AServiceImpl">
@@ -13,6 +13,6 @@
     </bean>
 
     <bean id="baseservice" class="com.minis.test.entity.BaseService">
-        <property type="com.minis.test.entity.BaseService" name="base" ref="basebaseservice"/>
+        <property type="com.minis.test.entity.BaseBaseService" name="base" ref="basebaseservice"/>
     </bean>
 </beans>
