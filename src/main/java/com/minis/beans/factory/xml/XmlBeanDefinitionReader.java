@@ -1,9 +1,9 @@
 package com.minis.beans.factory.xml;
 
+import com.minis.beans.factory.AbstractBeanFactory;
 import com.minis.beans.factory.config.BeanDefinition;
 import com.minis.beans.factory.config.ConstructorArgumentValue;
 import com.minis.beans.factory.config.ConstructorArgumentValues;
-import com.minis.beans.factory.support.SimpleBeanFactory;
 import com.minis.core.*;
 import org.dom4j.Element;
 
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XmlBeanDefinitionReader {
-    SimpleBeanFactory simpleBeanFactory;
-    public XmlBeanDefinitionReader(SimpleBeanFactory simpleBeanFactory) {
-        this.simpleBeanFactory = simpleBeanFactory;
+    AbstractBeanFactory beanFactory;
+    public XmlBeanDefinitionReader(AbstractBeanFactory simpleBeanFactory) {
+        this.beanFactory = simpleBeanFactory;
     }
 
     public void loadBeanFactoryDefinitions(Resource resource) {
@@ -59,9 +59,8 @@ public class XmlBeanDefinitionReader {
                 AVS.addArgumentValue(new ConstructorArgumentValue(aType, aName, aValue));
             }
             beanDefinition.setConstructorArgumentValues(AVS);
-            beanDefinition.setLazyInit(true);
 
-            this.simpleBeanFactory.registerBeanDefinition(beanID, beanDefinition);
+            this.beanFactory.registerBeanDefinition(beanID, beanDefinition);
         }
     }
 }

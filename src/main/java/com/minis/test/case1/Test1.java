@@ -1,10 +1,10 @@
-package com.minis.test;
+package com.minis.test.case1;
 
-import com.minis.test.entity.AService;
+import com.minis.test.case1.entity.AService;
 import com.minis.context.ClassPathXmlApplicationContext;
 import com.minis.beans.BeansException;
-import com.minis.test.entity.BService;
-import com.minis.test.entity.CService;
+import com.minis.test.case1.entity.BService;
+import com.minis.test.case1.entity.CService;
 
 public class Test1 {
     public static void main(String[] args) throws BeansException {

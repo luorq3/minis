@@ -1,4 +1,4 @@
-package com.minis.test.entity;
+package com.minis.test.case1.entity;
 
 public interface AService {
     void sayHello();
