@@ -10,4 +10,8 @@ public class BaseService {
     public void setBase(BaseBaseService base) {
         this.base = base;
     }
+
+    public void act() {
+        System.out.println("this is BaseService -> BaseBaseService");
+    }
 }

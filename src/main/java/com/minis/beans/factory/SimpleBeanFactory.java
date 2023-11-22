@@ -193,4 +193,15 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
     public boolean containsBeanDefinition(String name) {
         return this.beanDefinitionMap.containsKey(name);
     }
+
+    @Override
+    public void refresh() {
+        for (String beanName : beanDefinitionNames) {
+            try {
+                getBean(beanName);
+            } catch (BeansException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

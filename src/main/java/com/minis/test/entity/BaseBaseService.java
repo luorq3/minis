@@ -10,4 +10,8 @@ public class BaseBaseService {
     public void setAs(AService as) {
         this.as = as;
     }
+
+    public void act() {
+        System.out.println("this is BaseBaseService -> AService");
+    }
 }

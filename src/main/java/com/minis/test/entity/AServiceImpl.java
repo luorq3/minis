@@ -43,4 +43,8 @@ public class AServiceImpl implements AService {
     public void sayHello() {
         System.out.println(this.property1 + ", " + this.property2);
     }
+
+    public void act() {
+        System.out.println("this is AService -> BaseService");
+    }
 }
