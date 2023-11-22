@@ -1,23 +1,23 @@
 package com.minis.core;
 
 public class ArgumentValue {
-    private Object values;
+    private Object value;
     private String type;
     private String name;
 
-    public ArgumentValue(Object values, String type) {
-        this.values = values;
+    public ArgumentValue(Object value, String type) {
+        this.value = value;
         this.type = type;
     }
 
-    public ArgumentValue(Object values, String type, String name) {
-        this.values = values;
+    public ArgumentValue(String type, String name, Object value) {
+        this.value = value;
         this.type = type;
         this.name = name;
     }
 
-    public void setValues(Object values) {
-        this.values = values;
+    public void setValue(Object value) {
+        this.value = value;
     }
 
     public void setType(String type) {
@@ -28,8 +28,8 @@ public class ArgumentValue {
         this.name = name;
     }
 
-    public Object getValues() {
-        return values;
+    public Object getValue() {
+        return value;
     }
 
     public String getType() {
