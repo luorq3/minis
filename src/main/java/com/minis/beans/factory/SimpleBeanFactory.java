@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry {
     private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+    private Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(128);
     private List<String> beanDefinitionNames = new ArrayList<>();
 
     public SimpleBeanFactory() {
@@ -27,22 +28,31 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
     public Object getBean(String beanName) throws BeansException {
         Object singleton = this.getSingleton(beanName);
         if (singleton == null) {
-            BeanDefinition beanDefinition = this.beanDefinitionMap.get(beanName);
-            if (beanDefinition == null) {
-                throw new BeansException("No such bean.");
-            }
-            try {
+            singleton = this.earlySingletonObjects.get(beanName);
+            if (singleton == null) {
+                BeanDefinition beanDefinition = this.beanDefinitionMap.get(beanName);
                 singleton = createBean(beanDefinition);
-            } catch (Exception e) {
-                e.printStackTrace();
+                this.registerSingleton(beanName, singleton);
             }
-            this.registerSingleton(beanName, singleton);
         }
         return singleton;
     }
 
     private Object createBean(BeanDefinition beanDefinition) {
         Class<?> clazz = null;
+        Object obj = doCreateBean(beanDefinition);
+        this.earlySingletonObjects.put(beanDefinition.getId(), obj);
+        try {
+            clazz = Class.forName(beanDefinition.getClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        handleProperties(beanDefinition, clazz, obj);
+        return obj;
+    }
+
+    private Object doCreateBean(BeanDefinition beanDefinition) {
+        Class<?> clazz;
         Object obj = null;
         Constructor<?> con;
 
@@ -80,8 +90,8 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        handleProperties(beanDefinition, clazz, obj);
+        System.out.println(beanDefinition.getId() + " bean created."
+                + beanDefinition.getClassName() + ": " + obj.toString());
         return obj;
     }
 

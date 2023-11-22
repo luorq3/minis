@@ -56,6 +56,7 @@ public class XmlBeanDefinitionReader {
                 AVS.addArgumentValue(new ArgumentValue(aType, aName, aValue));
             }
             beanDefinition.setConstructorArgumentValues(AVS);
+            beanDefinition.setLazyInit(true);
 
             this.simpleBeanFactory.registerBeanDefinition(beanID, beanDefinition);
         }

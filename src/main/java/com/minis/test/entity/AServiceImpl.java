@@ -9,7 +9,7 @@ public class AServiceImpl implements AService {
 
     public AServiceImpl() {}
 
-    public AServiceImpl(String name, int level) {
+    public AServiceImpl(String name, Integer level) {
         this.name = name;
         this.level = level;
         System.out.println(this.name + "," + this.level);
