@@ -6,7 +6,7 @@ import com.minis.core.PropertyValues;
 public class BeanDefinition {
     String SCOPE_SINGLETON = "singleton";
     String SCOPE_PROTOTYPE = "prototype";
-    private boolean lazyInit = false;
+    private boolean lazyInit = true;  // 暂时只支持 lazyInit=true
     private String[] dependsOn;
     private ConstructorArgumentValues constructorArgumentValues;
     private PropertyValues propertyValues;

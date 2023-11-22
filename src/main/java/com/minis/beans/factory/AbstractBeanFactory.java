@@ -82,6 +82,9 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry
     public void registerBeanDefinition(String name, BeanDefinition bd) {
         this.beanDefinitionMap.put(name, bd);
         this.beanDefinitionNames.add(name);
+        // todo if BeanDefinition disable the LazyInit, it will break down
+        //  because when there exists circular dependencies, a object can't
+        //  find the BeanDefinition it depends on, and cause NullPointException.
         if (!bd.isLazyInit()) {
             try {
                 getBean(bd.getId());
