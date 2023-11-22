@@ -5,13 +5,13 @@
         <constructor-arg type="int" name="level" value="3"/>
         <property type="String" name="property1" value="Someone says"/>
         <property type="String" name="property2" value="Hello World!"/>
-<!--        <property type="com.minis.test.case1.BService" name="ref1" ref="bservice"/>-->
+        <property type="com.minis.test.case1.entity.BService" name="ref1" ref="bservice"/>
     </bean>
 
     <bean id="bservice" class="com.minis.test.case1.entity.BService">
-<!--        <property type="com.minis.test.case1.CService" name="cService" ref="cservice"/>-->
+        <property type="com.minis.test.case1.entity.CService" name="cService" ref="cservice"/>
     </bean>
     <bean id="cservice" class="com.minis.test.case1.entity.CService">
-<!--        <property type="com.minis.test.case1.entity.AService" name="aService" ref="aservice"/>-->
+        <property type="com.minis.test.case1.entity.AService" name="aService" ref="aservice"/>
     </bean>
 </beans>

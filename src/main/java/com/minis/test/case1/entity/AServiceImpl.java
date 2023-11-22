@@ -1,15 +1,11 @@
 package com.minis.test.case1.entity;
 
-import com.minis.beans.factory.annotation.Autowired;
-import com.minis.test.case1.BService;
-
-public class AServiceImpl implements com.minis.test.case1.entity.AService {
+public class AServiceImpl implements AService {
     private String name;
     private int level;
     private String property1;
     private String property2;
-    @Autowired
-    private com.minis.test.case1.entity.BService ref1;
+    private BService ref1;
 
     public AServiceImpl() {}
 
@@ -39,7 +35,7 @@ public class AServiceImpl implements com.minis.test.case1.entity.AService {
         return ref1;
     }
 
-    public void setRef1(com.minis.test.case1.entity.BService ref1) {
+    public void setRef1(BService ref1) {
         this.ref1 = ref1;
     }
 
@@ -48,6 +44,7 @@ public class AServiceImpl implements com.minis.test.case1.entity.AService {
         System.out.println(this.property1 + ", " + this.property2);
     }
 
+    @Override
     public void act() {
         System.out.println("this is " + this.getClass().toString() + " ->" + ref1.getClass());
     }
