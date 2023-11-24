@@ -8,5 +8,5 @@ public interface BeanFactory {
     boolean isSingleton(String name);
     boolean isPrototype(String name);
     Class<?> getType(String name);
-    void refresh();
+    void refresh() throws BeansException;
 }
