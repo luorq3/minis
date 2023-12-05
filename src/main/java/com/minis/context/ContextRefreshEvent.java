@@ -5,6 +5,7 @@ public class ContextRefreshEvent extends ApplicationEvent{
         super(arg0);
     }
 
+    @Override
     public String toString() {
         return this.msg;
     }

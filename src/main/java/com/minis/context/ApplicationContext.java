@@ -13,9 +13,7 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
     long getStartupDate();
     ConfigurableListableBeanFactory getBeanFactory() throws IllegalStateException;
     void setEnvironment(Environment environment);
-    Environment getEnvironment();
     void addBeanFactoryPostProcessor(BeanFactoryPostProcessor postProcessor);
-    void refresh() throws BeansException, IllegalStateException;
     void close();
     boolean isActive();
 }
