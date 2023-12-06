@@ -13,6 +13,17 @@ public class ClassPathXmlResource implements Resource{
     Element rootElement;
     Iterator<Element> elementIterator;
 
+    public ClassPathXmlResource(URL xmlUrl) {
+        SAXReader saxReader = new SAXReader();
+        try {
+            this.document = saxReader.read(xmlUrl);
+            this.rootElement = document.getRootElement();
+            this.elementIterator = this.rootElement.elementIterator();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ClassPathXmlResource(String fileName) {
         SAXReader saxReader = new SAXReader();
         URL xmlUrl = this.getClass().getClassLoader().getResource(fileName);
