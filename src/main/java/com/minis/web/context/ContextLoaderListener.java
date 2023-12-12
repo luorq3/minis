@@ -1,7 +1,6 @@
 package com.minis.web.context;
 
-import com.minis.context.ApplicationContext;
-import com.minis.context.ClassPathXmlApplicationContext;
+import com.minis.web.AnnotationConfigWebApplicationContext;
 import com.minis.web.WebApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -29,13 +28,15 @@ public class ContextLoaderListener implements ServletContextListener {
     }
 
     @Override
-    public void contextInitialized(ServletContextEvent sce) {
-
+    public void contextInitialized(ServletContextEvent event) {
+        initWebApplicationContext(event.getServletContext());
     }
 
     private void initWebApplicationContext(ServletContext servletContext) {
         String sContextLocation = servletContext.getInitParameter(CONFIG_LOCATION_PARAM);
-        ApplicationContext wac = new ClassPathXmlApplicationContext(sContextLocation);
-
+        WebApplicationContext wac = new AnnotationConfigWebApplicationContext(sContextLocation);
+        wac.setServletContext(servletContext);
+        this.context = wac;
+        servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
     }
 }

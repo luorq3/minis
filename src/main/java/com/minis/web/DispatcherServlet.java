@@ -28,10 +28,13 @@ public class DispatcherServlet extends HttpServlet {
     private final List<String> urlMappingNames = new ArrayList<>();
     private final Map<String, Object> mappingObjs = new HashMap<>();
     private final Map<String, Method> mappingMethods = new HashMap<>();
+    private WebApplicationContext webApplicationContext;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+
+        this.webApplicationContext = (WebApplicationContext) this.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 
         sContextConfigLocation = config.getInitParameter("contextConfigLocation");
         URL xmlPath = null;
