@@ -63,12 +63,12 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
         finishRefresh();
     }
 
-    abstract void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);
-    abstract void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory);
-    abstract void initApplicationEventPublisher();
-    abstract void onRefresh();
-    abstract void registerListeners();
-    abstract void finishRefresh();
+    protected abstract void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory);
+    protected abstract void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory);
+    protected abstract void initApplicationEventPublisher();
+    protected abstract void onRefresh();
+    protected abstract void registerListeners();
+    protected abstract void finishRefresh();
 
     @Override
     public void registerSingleton(String beanName, Object singletonObject) {

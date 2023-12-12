@@ -1,8 +1,5 @@
 package com.minis.web;
 
-import com.minis.core.ClassPathXmlResource;
-import com.minis.core.Resource;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
