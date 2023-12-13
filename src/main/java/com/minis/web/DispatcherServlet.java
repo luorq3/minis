@@ -3,9 +3,8 @@ package com.minis.web;
 import com.minis.web.method.HandlerMethod;
 import com.minis.web.method.annotation.RequestMappingHandlerAdapter;
 import com.minis.web.method.annotation.RequestMappingHandlerMapping;
-import com.minis.web.servlet.HandlerAdapter;
-import com.minis.web.servlet.HandlerMapping;
-import com.minis.web.servlet.ModelAndView;
+import com.minis.web.servlet.*;
+import com.minis.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -26,6 +25,7 @@ public class DispatcherServlet extends HttpServlet {
     private HandlerAdapter handlerAdapter;
     private WebApplicationContext webApplicationContext;
     private WebApplicationContext parentApplicationContext;
+    private ViewResolver viewResolver;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -36,6 +36,8 @@ public class DispatcherServlet extends HttpServlet {
         sContextConfigLocation = config.getInitParameter("contextConfigLocation");
 
         this.webApplicationContext = new AnnotationConfigWebApplicationContext(sContextConfigLocation, this.parentApplicationContext);
+
+        viewResolver = new InternalResourceViewResolver();
 
         refresh();
     }
@@ -75,14 +77,23 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     protected void render(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception {
-        //获取model，写到request的Attribute中：
-        Map<String, Object> modelMap = mv.getModel();
-        for (Map.Entry<String, Object> e : modelMap.entrySet()) {
-            request.setAttribute(e.getKey(), e.getValue());
+        if (mv == null) {
+            response.getWriter().flush();
+            response.getWriter().close();
+            return;
         }
-        //输出到目标JSP
+
         String sTarget = mv.getViewName();
-        String sPath = "/" + sTarget + ".jsp";
-        request.getRequestDispatcher(sPath).forward(request, response);
+        Map<String, Object> modelMap = mv.getModel();
+        View view = resolveViewName(sTarget, modelMap, request);
+        view.render(modelMap, request, response);
+    }
+
+    protected View resolveViewName(String viewName, Map<String, Object> model,
+                                   HttpServletRequest request) throws Exception {
+        if (this.viewResolver != null) {
+            return viewResolver.resolveViewName(viewName);
+        }
+        return null;
     }
 }
