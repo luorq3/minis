@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletResponse;
  * @author luoruiqing
  */
 public interface HandlerAdapter {
-    void handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+    ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
 }

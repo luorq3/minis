@@ -1,12 +1,11 @@
 package com.minis.web.method.annotation;
 
-import com.minis.web.RequestMapping;
+import com.minis.web.bind.annotation.RequestMapping;
 import com.minis.web.WebApplicationContext;
 import com.minis.web.method.HandlerMethod;
 import com.minis.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**

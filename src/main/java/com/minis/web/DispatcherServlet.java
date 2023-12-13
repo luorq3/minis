@@ -5,12 +5,14 @@ import com.minis.web.method.annotation.RequestMappingHandlerAdapter;
 import com.minis.web.method.annotation.RequestMappingHandlerMapping;
 import com.minis.web.servlet.HandlerAdapter;
 import com.minis.web.servlet.HandlerMapping;
+import com.minis.web.servlet.ModelAndView;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @author luoruiqing
@@ -68,6 +70,19 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
         HandlerAdapter handlerAdapter = this.handlerAdapter;
-        handlerAdapter.handle(request, response, handlerMethod);
+        ModelAndView mav = handlerAdapter.handle(request, response, handlerMethod);
+        render(request, response, mav);
+    }
+
+    protected void render(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception {
+        //获取model，写到request的Attribute中：
+        Map<String, Object> modelMap = mv.getModel();
+        for (Map.Entry<String, Object> e : modelMap.entrySet()) {
+            request.setAttribute(e.getKey(), e.getValue());
+        }
+        //输出到目标JSP
+        String sTarget = mv.getViewName();
+        String sPath = "/" + sTarget + ".jsp";
+        request.getRequestDispatcher(sPath).forward(request, response);
     }
 }

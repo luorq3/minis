@@ -1,6 +1,6 @@
 package com.minis.test.case3;
 
-import com.minis.web.RequestMapping;
+import com.minis.web.bind.annotation.RequestMapping;
 
 /**
  * @author luoruiqing
